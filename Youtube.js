@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import {  ImageBackground, Image, ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
 import Yimage from "./assets/pngwing.png";
-import { styles } from "./youtube/style";
+import { styles } from "./style/youtube/style";
 
 export default function Youtube() {
     const [loading, setLoading] = useState(true);
