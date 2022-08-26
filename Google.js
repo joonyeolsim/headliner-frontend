@@ -1,15 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import {  ImageBackground, Image, ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
-import Yimage from "./assets/pngwing.png";
-import { styles } from "./style/youtube/style";
+import Gimage from "./assets/google.png";
+import { styles } from "./style/google/style";
 
-
-export default function Youtube() {
+export default function Google() {
     const [loading, setLoading] = useState(true);
     const [coins, setCoins] = useState([]);
     useEffect(()=>{
-      fetch(`http://34.64.177.161:8000/trend/youtube`).then((response) =>
+      fetch(`http://34.64.177.161:8000/trend/google`).then((response) =>
       response.json()).then((json) => {
         setCoins(json.body);
         setLoading(false);
@@ -19,28 +17,26 @@ export default function Youtube() {
     return (
       <View style={styles.container}>
        <View style={styles.city}>
-        <ImageBackground source={Yimage}  >
-              <View style={styles.logo}>
+        <ImageBackground source={Gimage}  >
+              <View 
+              style={styles.logo}>
               </View>
         </ImageBackground>
-            <Text style={styles.cityName}>YOUTUBE</Text> 
+            <Text style={styles.cityName}>Google</Text> 
         </View>
   
         <ScrollView
-          
-          //pagingEnabled
+        
           showsHorizontalScrollIndicator={true}
-          contentContainerStyle={styles.weather}>
+          contentContainerStyle={{flexGrow: 1}}>
           {
             coins.map((coin)=>
-            <View key ={coin.id} style={styles.day}>
-              <Text style={styles.temp}>{coin.title}</Text>
-              <ImageBackground source={{uri:coin.thumbnails.high.url}} >
+            <View key ={coin.rank} style={styles.day}>
+                <Text style={styles.temp}>{coin.rank}  {coin.keyword}</Text>
                 <View style={styles.back}>
                 </View>
-              </ImageBackground>
             </View>
-          
+            
             )
           }
         </ScrollView>
