@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import {  ImageBackground, Image, ActivityIndicator, Text, View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import {  ImageBackground, Image, ActivityIndicator, Text, View, StyleSheet, ScrollView, Dimensions,Linking, TouchableOpacity  } from 'react-native';
 import Yimage from "./assets/pngwing.png";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -29,19 +29,19 @@ export default function App() {
       </View>
 
       <ScrollView
-        
         //pagingEnabled
         showsHorizontalScrollIndicator={true}
         contentContainerStyle={styles.weather}>
         {
           coins.map((coin)=>
-          <View key ={coin.id} style={styles.day}>
+          <TouchableOpacity key ={coin.id} style={styles.day} onPress={() =>
+            Linking.openURL(coin.url)}>
             <Text style={styles.temp}>{coin.title}</Text>
             <ImageBackground source={{uri:coin.thumbnails.high.url}} >
               <View style={styles.back}>
               </View>
             </ImageBackground>
-          </View>
+          </TouchableOpacity>
           
           )
         }
