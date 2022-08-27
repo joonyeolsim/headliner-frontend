@@ -2,11 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import {  ImageBackground, Image, ActivityIndicator, Text, View, StyleSheet, ScrollView, Dimensions,Linking, TouchableOpacity  } from 'react-native';
 import Yimage from "./assets/pngwing.png";
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default function App() {
+const  App = () => {
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
   useEffect(()=>{
@@ -50,6 +52,12 @@ export default function App() {
     </View>
   );
 }
+
+export default () => (
+  <ApplicationProvider {...eva} theme={eva.light}>
+    <App />
+  </ApplicationProvider>
+);
 
 const styles = StyleSheet.create({
   container:{
