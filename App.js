@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import {  ImageBackground, Image, ActivityIndicator, View, StyleSheet, ScrollView, Dimensions,Linking, TouchableOpacity  } from 'react-native';
+import {  ImageBackground, View, StyleSheet, ScrollView, Dimensions,Linking, TouchableOpacity  } from 'react-native';
 import Yimage from "./assets/pngwing.png";
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Card, Text } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry, Card, Text, Icon } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import {ViewIcon, VideoIcon} from "./component/Icons";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const Header = (coin) => {
   return(
-   <Text>{coin.title}</Text>
-);
+   <Text category='s1'>{coin.title}</Text>
+    );
   }
 
-  const Footer = (coin) => (
-      <Text>{coin.view_count}</Text>
-  );
+  const Footer = (coin) => {
+    return(
+      <View style={styles.videoInfo}>
+        <View><Text><VideoIcon/>  {coin.channelTitle}</Text></View>
+          <Text><ViewIcon/>  {Math.round(coin.view_count/10000)}만회</Text>
+      </View>
+       );   
+      
+    };
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -60,9 +68,13 @@ const App = () => {
 }
 
 export default () => (
-  <ApplicationProvider {...eva} theme={eva.light}>
-    <App />
-  </ApplicationProvider>
+  <>
+    <IconRegistry icons={EvaIconsPack} />
+   <ApplicationProvider {...eva} theme={eva.light}>
+    
+     <App />
+    </ApplicationProvider>
+  </>
 );
 
 const styles = StyleSheet.create({
@@ -110,8 +122,18 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     margin: 2,
+    borderWidth: 5,
+    borderColor : "teal",
+    borderRadius: 15,
   },
   logoText:{
     margin:2,
+  },
+  icon: {
+    width: 5,
+    height: 5,
+  },
+  videoInfo:{
+    justifyContent: "space-evenly",
   }
 })
