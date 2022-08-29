@@ -1,14 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import {  ImageBackground, Image, ActivityIndicator, Text, View, StyleSheet, ScrollView, Dimensions,Linking, TouchableOpacity  } from 'react-native';
+import {  ImageBackground, View, StyleSheet, ScrollView, Dimensions,Linking, TouchableOpacity  } from 'react-native';
 import Yimage from "./assets/pngwing.png";
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry, Card, Text, Icon } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import {ViewIcon, VideoIcon} from "./component/Icons";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const  App = () => {
+const Header = (coin) => {
+  return(
+   <Text category='s1'>{coin.title}</Text>
+    );
+  }
+
+  const Footer = (coin) => {
+    return(
+      <View style={styles.videoInfo}>
+        <View><Text><VideoIcon/>  {coin.channelTitle}</Text></View>
+          <Text><ViewIcon/>  {Math.round(coin.view_count/10000)}만회</Text>
+      </View>
+       );   
+      
+    };
+
+const App = () => {
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
   useEffect(()=>{
@@ -24,27 +41,24 @@ const  App = () => {
 
       <View style={styles.city}>
       <ImageBackground source={Yimage}  >
-            <View style={styles.logo}>
-            </View>
+          <View style={styles.logo}>
+          </View>
       </ImageBackground>
-          <Text style={styles.cityName}>YOUTUBE</Text> 
+          <Text style={styles.logoText} category='h1'>YOUTUBE</Text> 
       </View>
 
       <ScrollView
-        //pagingEnabled
         showsHorizontalScrollIndicator={true}
         contentContainerStyle={styles.weather}>
         {
           coins.map((coin)=>
-          <TouchableOpacity key ={coin.id} style={styles.day} onPress={() =>
-            Linking.openURL(coin.url)}>
-            <Text style={styles.temp}>{coin.title}</Text>
-            <ImageBackground source={{uri:coin.thumbnails.high.url}} >
-              <View style={styles.back}>
-              </View>
-            </ImageBackground>
-          </TouchableOpacity>
-          
+            <Card key ={coin.id} style={styles.card} header={Header(coin)} footer={Footer(coin)}
+              onPress={() => Linking.openURL(coin.url)}>
+              <ImageBackground source={{uri:coin.thumbnails.high.url}} >
+                <View style={styles.back}>
+                </View>
+              </ImageBackground>
+            </Card>
           )
         }
       </ScrollView>
@@ -54,9 +68,13 @@ const  App = () => {
 }
 
 export default () => (
-  <ApplicationProvider {...eva} theme={eva.light}>
-    <App />
-  </ApplicationProvider>
+  <>
+    <IconRegistry icons={EvaIconsPack} />
+   <ApplicationProvider {...eva} theme={eva.light}>
+    
+     <App />
+    </ApplicationProvider>
+  </>
 );
 
 const styles = StyleSheet.create({
@@ -100,5 +118,22 @@ const styles = StyleSheet.create({
   logo:{
     width: 50,
     height : 50,
+  },
+  card: {
+    flex: 1,
+    margin: 2,
+    borderWidth: 5,
+    borderColor : "teal",
+    borderRadius: 15,
+  },
+  logoText:{
+    margin:2,
+  },
+  icon: {
+    width: 5,
+    height: 5,
+  },
+  videoInfo:{
+    justifyContent: "space-evenly",
   }
 })
