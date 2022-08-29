@@ -1,12 +1,12 @@
 import Youtube from './Youtube'; 
 import Google from './Google'; 
-import { StyleSheet, Text, Button,View, ScrollView } from 'react-native';
+import { StatusBar, StyleSheet, Text, Button,View, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View style={{flex: 1,
+    <View style={{flex: 2,
       alignItems: 'center',
       justifyContent: 'center'}}>
       <Button
