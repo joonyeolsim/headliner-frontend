@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View style={{flex: 1,
+    <View style={{flex: 2,
       alignItems: 'center',
       justifyContent: 'center'}}>
       <Button
