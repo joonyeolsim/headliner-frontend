@@ -5,6 +5,7 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Card, Text, Icon } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import {ViewIcon, VideoIcon, StarIcon} from "../component/Icons";
+import { styles } from "../style/youtube/style";
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
