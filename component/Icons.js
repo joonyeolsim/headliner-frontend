@@ -18,6 +18,14 @@ export const VideoIcon  = () => (
     />
   );
 
+  export const StarIcon = () => (
+    <Icon
+      style={styles.icon}
+      fill='#FA8072'
+      name='star'
+    />
+  );
+
 const styles = StyleSheet.create({
   icon: {
     width: 20,
