@@ -1,5 +1,5 @@
-import Youtube from './Youtube'; 
-import Google from './Google'; 
+import Youtube from './screens/Youtube'; 
+import Google from './screens/Google'; 
 import { StatusBar, StyleSheet, Text, Button,View, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
